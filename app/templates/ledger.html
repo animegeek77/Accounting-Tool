@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Trial Balance</h2>
+<table>
+  <thead>
+    <tr><th>Account</th><th>Name</th><th>Debit</th><th>Credit</th></tr>
+  </thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td><a href="/ledger/account/{{ r.account_code }}">{{ r.account_code }}</a></td>
+      <td>{{ r.account_name }}</td>
+      <td>{{ r.debit }}</td>
+      <td>{{ r.credit }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p><strong>Total Debits:</strong> {{ total_debits }} | <strong>Total Credits:</strong> {{ total_credits }}</p>
+{% endblock %}

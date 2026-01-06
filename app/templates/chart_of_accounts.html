@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Chart of Accounts (Placeholder)</h2>
+<table>
+  <thead>
+    <tr><th>Code</th><th>Name</th><th>Type</th></tr>
+  </thead>
+  <tbody>
+  {% for a in accounts %}
+    <tr>
+      <td>{{ a.code }}</td>
+      <td>{{ a.name }}</td>
+      <td>{{ a.type }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

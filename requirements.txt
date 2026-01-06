@@ -1,0 +1,7 @@
+﻿# Runtime
+Flask>=2.2
+
+# Optional / dev
+python-dotenv>=1.0
+pytest>=7.0
+flake8>=6.0

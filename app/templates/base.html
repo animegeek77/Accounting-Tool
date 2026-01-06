@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or "Accounting App" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <h1>Minimal Accounting UI</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('chart_of_accounts') }}">Chart of Accounts</a> |
+        <a href="{{ url_for('journal_entries') }}">Journal Entries</a> |
+        <a href="{{ url_for('ledger') }}">Ledger / Trial Balance</a>
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <small>Placeholder UI — no business logic or persistence</small>
+    </footer>
+  </body>
+</html>

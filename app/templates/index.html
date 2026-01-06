@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Welcome</h2>
+<p>This is a minimal Flask-based placeholder UI for accounting views.</p>
+<ul>
+  <li><a href="{{ url_for('chart_of_accounts') }}">Chart of Accounts (read-only)</a></li>
+  <li><a href="{{ url_for('journal_entries') }}">Journal Entries (read-only)</a></li>
+  <li><a href="{{ url_for('ledger') }}">Ledger / Trial Balance (read-only)</a></li>
+</ul>
+{% endblock %}

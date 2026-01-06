@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+header h1 { margin: 0 0 6px 0; }
+nav { margin-bottom: 12px; }
+table { border-collapse: collapse; width: 100%; max-width: 900px; }
+th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+footer { margin-top: 20px; color: #666; }

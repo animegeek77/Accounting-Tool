@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Journal Entries (Placeholder)</h2>
+    <ul>
+        {% for e in entries %}
+        <li>
+        <strong>{{ e.id }}</strong> — {{ e.date }} — {{ e.description }}
+        <ul>
+        {% for l in e.lines %}
+        <li>{{ l.account_code }}: {{ l.side }} {{ l.amount }}</li>
+        {% endfor %}
+        </ul>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
