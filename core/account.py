@@ -168,13 +168,13 @@ class ChartOfAccounts:
     and numbering convention compliance as per accounting_scope.md.
     """
     
-    # Account code ranges per Chart of Accounts (TAX range removed as unused)
+    # Account code ranges per Chart of Accounts
     RANGES: Dict[str, tuple] = {
         "ASSET": (1000, 1999),
         "LIABILITY": (2000, 2999),
         "EQUITY": (3000, 3999),
         "INCOME": (4000, 4999),
-        "EXPENSE": (5000, 6999),
+        "EXPENSE": (5000, 7999),  # Includes Operating Expenses (6000-6999) and Taxes (7000-7999)
     }
     
     def __init__(self):
@@ -339,7 +339,8 @@ class ChartOfAccounts:
             AccountType.EXPENSE: self.RANGES['EXPENSE'],
         }
         if account_type not in mapping:
-            return False
+            # If no range defined, allow any code (for extensibility)
+            return True
         min_code, max_code = mapping[account_type]
         return min_code <= code <= max_code
     

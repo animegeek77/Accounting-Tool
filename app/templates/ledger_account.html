@@ -1,23 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>General Ledger — Account {{ account_code }} ({{ account_name }})</h2>
-<p>Total Debits: {{ total_debits }} | Total Credits: {{ total_credits }}</p>
+<h2>General Ledger — {{ account_name }}</h2>
+<p>
+  <span class="account-code">{{ account_code }}</span>
+  <span class="type-{{ account_type|lower }}">{{ account_type }}</span>
+</p>
+
+{% if entries %}
 <table>
   <thead>
-    <tr><th>Date</th><th>Journal Entry</th><th>Description</th><th>Side</th><th>Amount</th><th>Project</th></tr>
+    <tr>
+      <th>Date</th>
+      <th>Journal Entry</th>
+      <th>Description</th>
+      <th>Debit</th>
+      <th>Credit</th>
+      <th>Running Balance</th>
+    </tr>
   </thead>
   <tbody>
   {% for e in entries %}
     <tr>
       <td>{{ e.timestamp }}</td>
-      <td>{{ e.journal_entry_id }}</td>
-      <td>{{ e.description }}</td>
-      <td>{{ e.side }}</td>
-      <td>{{ e.amount }}</td>
-      <td>{{ e.project_id }}</td>
+      <td><span class="entry-id">{{ e.journal_entry_id[:8] }}...</span></td>
+      <td>
+        {{ e.description or '—' }}
+        {% if e.project_id %}
+        <span class="badge badge-project">{{ e.project_id }}</span>
+        {% endif %}
+      </td>
+      <td class="debit">{% if e.side == 'debit' %}{{ e.amount }}{% else %}—{% endif %}</td>
+      <td class="credit">{% if e.side == 'credit' %}{{ e.amount }}{% else %}—{% endif %}</td>
+      <td class="amount">{{ e.running_balance }}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
+{% else %}
+<div class="empty-state">
+  <p>No ledger entries found for this account.</p>
+</div>
+{% endif %}
+
+<div class="summary">
+  <p><strong>Total Debits:</strong> <span class="debit">{{ total_debits }}</span></p>
+  <p><strong>Total Credits:</strong> <span class="credit">{{ total_credits }}</span></p>
+  <p><strong>Net Balance:</strong> <span class="amount">{{ net_balance }}</span></p>
+</div>
 {% endblock %}

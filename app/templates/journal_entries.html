@@ -1,17 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Journal Entries (Placeholder)</h2>
+<h2>Journal Entries</h2>
+<p>All journal entries follow double-entry accounting rules (debits = credits). Click account codes to view detailed ledger entries.</p>
+
+{% if entries %}
+<ul class="journal-entries">
+  {% for e in entries %}
+  <li>
+    <div>
+      <span class="entry-id">{{ e.id[:8] }}...</span>
+      <span class="entry-date">{{ e.date }}</span>
+      {% if e.source_ref %}
+      <span class="badge badge-ref">{{ e.source_ref }}</span>
+      {% endif %}
+      {% if e.project_id %}
+      <span class="badge badge-project">{{ e.project_id }}</span>
+      {% endif %}
+    </div>
+    <strong>{{ e.description }}</strong>
     <ul>
-        {% for e in entries %}
-        <li>
-        <strong>{{ e.id }}</strong> — {{ e.date }} — {{ e.description }}
-        <ul>
-        {% for l in e.lines %}
-        <li>{{ l.account_code }}: {{ l.side }} {{ l.amount }}</li>
-        {% endfor %}
-        </ul>
-        </li>
-        {% endfor %}
+    {% for l in e.lines %}
+      <li>
+        <a href="{{ url_for('main.ledger_account', account_code=l.account_code) }}" class="account-code">{{ l.account_code }}</a>:
+        <span class="{{ l.side }}">{{ l.side|title }}</span>
+        <span class="amount">{{ l.amount }}</span>
+        {% if l.project_id %}
+        <span class="badge badge-project">{{ l.project_id }}</span>
+        {% endif %}
+        {% if l.description %}— {{ l.description }}{% endif %}
+      </li>
+    {% endfor %}
     </ul>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="empty-state">
+  <p>No journal entries found.</p>
+</div>
+{% endif %}
+
+<div class="summary">
+  <p><strong>Total Entries:</strong> {{ entries|length }}</p>
+</div>
 {% endblock %}

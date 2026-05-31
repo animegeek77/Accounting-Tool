@@ -181,15 +181,15 @@ class JournalEntry:
             account = chart.get_account(li.account_code)
             if account is None:
                 missing.append(li.account_code)
+                continue  # Skip further validation for missing accounts
             elif account.is_archived:
                 archived.append(li.account_code)
+                continue  # Skip further validation for archived accounts
+
             # Validate project tagging: if either the entry or line has a project,
             # ensure the referenced account is project-taggable.
             effective_project = li.project_id if li.project_id is not None else self.project_id
             if effective_project is not None:
-                if not account:
-                    # account missing will be raised above; skip here
-                    continue
                 if not getattr(account, 'is_project_taggable', False):
                     inconsistent_projects.append(f"{li.account_code}")
 

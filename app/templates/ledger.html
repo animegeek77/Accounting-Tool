@@ -2,20 +2,36 @@
 
 {% block content %}
 <h2>Trial Balance</h2>
+<p>All accounts with non-zero balances. Debit and credit totals must be equal.</p>
+
 <table>
   <thead>
-    <tr><th>Account</th><th>Name</th><th>Debit</th><th>Credit</th></tr>
+    <tr>
+      <th>Account Code</th>
+      <th>Account Name</th>
+      <th>Debit</th>
+      <th>Credit</th>
+    </tr>
   </thead>
   <tbody>
   {% for r in rows %}
     <tr>
-      <td><a href="/ledger/account/{{ r.account_code }}">{{ r.account_code }}</a></td>
+      <td><a href="{{ url_for('main.ledger_account', account_code=r.account_code) }}" class="account-code">{{ r.account_code }}</a></td>
       <td>{{ r.account_name }}</td>
-      <td>{{ r.debit }}</td>
-      <td>{{ r.credit }}</td>
+      <td class="debit">{% if r.debit != '0' %}{{ r.debit }}{% else %}—{% endif %}</td>
+      <td class="credit">{% if r.credit != '0' %}{{ r.credit }}{% else %}—{% endif %}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
-<p><strong>Total Debits:</strong> {{ total_debits }} | <strong>Total Credits:</strong> {{ total_credits }}</p>
+
+<div class="summary">
+  <p><strong>Total Debits:</strong> <span class="debit">{{ total_debits }}</span></p>
+  <p><strong>Total Credits:</strong> <span class="credit">{{ total_credits }}</span></p>
+  {% if total_debits == total_credits %}
+  <p style="color: var(--success-color); font-weight: 600;">✓ Balanced</p>
+  {% else %}
+  <p style="color: var(--error-color); font-weight: 600;">✗ Not Balanced</p>
+  {% endif %}
+</div>
 {% endblock %}

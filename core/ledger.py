@@ -168,8 +168,8 @@ class Ledger:
                     debit_amt = Decimal(0)
                     credit_amt = balance_amount
             elif account.normal_balance == NormalBalance.CREDIT:
-                if ab.balance <= Decimal(0):
-                    # Normal credit balance (note: balance is negative in this case)
+                if ab.balance >= Decimal(0):
+                    # Normal credit balance (positive when credits > debits)
                     debit_amt = Decimal(0)
                     credit_amt = balance_amount
                 else:

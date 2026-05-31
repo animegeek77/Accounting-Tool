@@ -1,11 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Welcome</h2>
-<p>This is a minimal Flask-based placeholder UI for accounting views.</p>
-<ul>
-  <li><a href="{{ url_for('chart_of_accounts') }}">Chart of Accounts (read-only)</a></li>
-  <li><a href="{{ url_for('journal_entries') }}">Journal Entries (read-only)</a></li>
-  <li><a href="{{ url_for('ledger') }}">Ledger / Trial Balance (read-only)</a></li>
-</ul>
+<h2>Welcome to the Accounting System</h2>
+<p>This demonstration UI provides read-only views of core accounting objects including Chart of Accounts, Journal Entries, and Trial Balance reports.</p>
+
+<div class="home-cards">
+  <div class="home-card">
+    <h3>Chart of Accounts</h3>
+    <p>View the complete chart of accounts with all asset, liability, equity, income, and expense accounts organized by account type.</p>
+    <a href="{{ url_for('main.chart_of_accounts') }}" class="home-card-link">View Chart ofAccounts →</a>
+  </div>
+
+  <div class="home-card">
+    <h3>Journal Entries</h3>
+    <p>Browse all journal entries with detailed line items showing debits and credits for each transaction.</p>
+    <a href="{{ url_for('main.journal_entries') }}" class="home-card-link">View Journal Entries →</a>
+  </div>
+
+  <div class="home-card">
+    <h3>Trial Balance</h3>
+    <p>Review the trial balance report showing all account balances with debit and credit totals that must balance.</p>
+    <a href="{{ url_for('main.ledger_view_handler') }}" class="home-card-link">View Trial Balance →</a>
+  </div>
+</div>
+
+<div class="card">
+  <h3>System Status</h3>
+  <p><strong>Phase:</strong> Phase 3 (Read-only Visibility)</p>
+  <p><strong>Storage:</strong> In-memory (no database persistence)</p>
+  <p><strong>Sample Data:</strong> 6 sample journal entries loaded for demonstration</p>
+</div>
 {% endblock %}

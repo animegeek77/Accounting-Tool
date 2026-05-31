@@ -8,19 +8,19 @@
   </head>
   <body>
     <header>
-      <h1>Minimal Accounting UI</h1>
+      <h1>Accounting System</h1>
       <nav>
-        <a href="{{ url_for('index') }}">Home</a> |
-        <a href="{{ url_for('chart_of_accounts') }}">Chart of Accounts</a> |
-        <a href="{{ url_for('journal_entries') }}">Journal Entries</a> |
-        <a href="{{ url_for('ledger') }}">Ledger / Trial Balance</a>
+        <a href="{{ url_for('main.index') }}">Home</a>
+        <a href="{{ url_for('main.chart_of_accounts') }}">Chart of Accounts</a>
+        <a href="{{ url_for('main.journal_entries') }}">Journal Entries</a>
+        <a href="{{ url_for('main.ledger_view_handler') }}">Trial Balance</a>
       </nav>
     </header>
     <main>
       {% block content %}{% endblock %}
     </main>
     <footer>
-      <small>Placeholder UI — no business logic or persistence</small>
+      <small>Phase 3: Read-only Visibility — In-memory demonstration (no persistence)</small>
     </footer>
   </body>
 </html>

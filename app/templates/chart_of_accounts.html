@@ -1,19 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Chart of Accounts (Placeholder)</h2>
+<h2>Chart of Accounts</h2>
+<p>Browse all accounts organized by type. Click any account code to view its detailed ledger.</p>
+
 <table>
   <thead>
-    <tr><th>Code</th><th>Name</th><th>Type</th></tr>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Normal Balance</th>
+      <th>Project Taggable</th>
+      <th>Tax Relevant</th>
+    </tr>
   </thead>
   <tbody>
   {% for a in accounts %}
     <tr>
-      <td>{{ a.code }}</td>
+      <td><a href="{{ url_for('main.ledger_account', account_code=a.code) }}" class="account-code">{{ a.code }}</a></td>
       <td>{{ a.name }}</td>
-      <td>{{ a.type }}</td>
+      <td><span class="type-{{ a.type|lower }}">{{ a.type }}</span></td>
+      <td>{{ a.normal_balance or '—' }}</td>
+      <td>{% if a.project_taggable %}Yes{% else %}—{% endif %}</td>
+      <td>{% if a.tax_relevant %}Yes{% else %}—{% endif %}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
+
+<div class="summary">
+  <p><strong>Total Accounts:</strong> {{ accounts|length }}</p>
+</div>
 {% endblock %}
