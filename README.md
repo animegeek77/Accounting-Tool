@@ -1,19 +1,101 @@
-# Minimal Flask Accounting UI (placeholder)
+# Flask Accounting System
 
-This workspace provides a minimal Flask web UI with read-only views for inspecting accounting data: Chart of Accounts, Journal Entries, and the Ledger. The project is organized into phased milestones.
+A professional double-entry accounting system built with Flask, featuring a modern UI for managing Chart of Accounts, Journal Entries, and Trial Balance reports.
 
-How to run (Windows PowerShell):
+## Quick Start
 
-`powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+```bash
+# Install dependencies
 pip install -r requirements.txt
-python app\app.py
-`
 
-Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in a browser.
+# Run the application
+python3 app/app.py
 
-Notes:
+# Or use npm
+npm start
+```
+
+The app will be available at **http://localhost:5000**
+
+## Features
+
+### Phase 1-2: Core Accounting Engine (Complete)
+- **Chart of Accounts**: 47 accounts across Assets, Liabilities, Equity, Income, and Expenses
+- **Double-Entry Bookkeeping**: Enforced balance validation (debits = credits)
+- **Project Tagging**: Track transactions by project
+- **Tax Awareness**: Mark tax-relevant accounts for reporting
+
+### Phase 3: Read-Only Web UI (Complete)
+- **Home Dashboard**: System overview and navigation
+- **Chart of Accounts**: Browse all 47 accounts with type color-coding
+- **Journal Entries**: View 6 sample transactions with full details
+- **Trial Balance**: Balanced report showing account balances
+- **Account Ledger**: Detailed transaction history per account
+
+### Sample Data
+The app comes pre-loaded with 6 realistic transactions:
+1. Project revenue recognition (Invoice payment)
+2. Freelancer contractor payment
+3. Office rent expense
+4. Software subscriptions
+5. Equipment purchase on credit
+6. Client invoice (Accounts Receivable)
+
+## Current Status
+
+**Trial Balance**: Balanced at $44,500 (debits = credits)
+**Total Accounts**: 47 accounts
+**Journal Entries**: 6 sample entries
+
+## Project Structure
+
+```
+project/
+├── app/
+│   ├── app.py              # Flask application factory
+│   ├── routes.py           # Read-only route handlers
+│   ├── static/
+│   │   └── style.css       # Modern responsive styling
+│   └── templates/
+│       ├── base.html       # Base template with navigation
+│       ├── index.html      # Home dashboard
+│       ├── chart_of_accounts.html
+│       ├── journal_entries.html
+│       ├── ledger.html     # Trial balance
+│       ├── ledger_account.html  # Account detail
+│       └── error.html      # Error pages
+├── core/
+│   ├── account.py          # Chart of Accounts model
+│   ├── journal_entry.py    # Double-entry validation
+│   ├── posting_engine.py   # Posting to ledger
+│   ├── ledger.py           # Balance calculations
+│   └── project.py          # Project tracking (reserved)
+├── docs/
+│   ├── accounting_scope.md
+│   └── chart_of_accounts.md
+└── requirements.txt
+```
+
+## Development
+
+The application includes:
+- Comprehensive error handling with try-catch blocks
+- Structured logging for debugging
+- Modern UI with responsive design
+- Color-coded account types
+- Running balance calculations in ledgers
+
+## Future Phases
+
+### Phase 4: Controlled Mutation (Planned)
+- POST endpoints for creating journal entries
+- Reversing entries for corrections
+- Period locks for closing books
+
+### Phase 5: Persistence (Planned)
+- Database integration (Supabase ready)
+- Data durability and recovery
+- Migration tools
 
 ## Project Phases (Wireframe)
 

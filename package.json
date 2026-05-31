@@ -1,0 +1,12 @@
+{
+  "name": "accounting-system",
+  "version": "1.0.0",
+  "description": "Flask-based accounting system with double-entry bookkeeping",
+  "scripts": {
+    "start": "python3 app/app.py",
+    "dev": "python3 app/app.py"
+  },
+  "keywords": ["accounting", "flask", "double-entry"],
+  "author": "",
+  "license": "ISC"
+}
