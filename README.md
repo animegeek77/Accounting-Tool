@@ -1,4 +1,4 @@
-﻿# Minimal Flask Accounting UI (placeholder)
+# Minimal Flask Accounting UI (placeholder)
 
 This workspace provides a minimal Flask web UI with read-only views for inspecting accounting data: Chart of Accounts, Journal Entries, and the Ledger. The project is organized into phased milestones.
 

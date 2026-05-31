@@ -1,4 +1,4 @@
-﻿# Runtime
+# Runtime
 Flask>=2.2
 
 # Optional / dev
